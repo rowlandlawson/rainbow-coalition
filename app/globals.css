@@ -1,26 +1,92 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ============================================
+   DESIGN TOKENS (Tailwind v4 @theme)
+   ============================================ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-mont);
   --font-mono: var(--font-geist-mono);
+
+  /* Coalition palette */
+  --color-c1: #e8090e;
+  --color-c2: #f77f00;
+  --color-c3: #f7d117;
+  --color-c4: #2a9d57;
+  --color-c5: #2872d8;
+  --color-c6: #7b3fe4;
+  --color-ink: #1d1416;
+  --color-bg: #faf7f2;
+  --color-surface: #ffffff;
+  --color-muted: #6b5e61;
+  --color-line: #e3dfd6;
+
+  /* Keyframe animations */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes hero-pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   BASE STYLES
+   ============================================ */
+:root {
+  --background: #faf7f2;
+  --foreground: #1d1416;
+  color-scheme: light;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Force light theme on every device */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #faf7f2;
+    --foreground: #1d1416;
+    color-scheme: light;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Preloader fade transition (600ms not in default Tailwind scale) */
+.duration-600 {
+  transition-duration: 600ms;
+}
+.duration-700 {
+  transition-duration: 700ms;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
